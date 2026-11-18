@@ -65,6 +65,19 @@ def export_entries(
         headers={"Content-Disposition": 'attachment; filename="metric_def.csv"'})
 
 
+@router.get("/insight-metrics", response_model=dict)
+def insight_metrics(
+    report_code: str | None = Query(default=None, alias="报告编号"),
+    version: str | None = Query(default=None, alias="版本"),
+) -> dict:
+    """V008 联动：读取洞察结论数据表的指标字段，口径冲突时拒绝消费。"""
+    result = service.insight_metric_fields(report_code=report_code, version=version)
+    if not result["ok"]:
+        # 拒绝共享同一版本却口径不同的结论：返回 409 并附上冲突明细。
+        raise HTTPException(status_code=409, detail=result)
+    return result
+
+
 @router.get("/{entry_id}", response_model=dict)
 def get_entry(entry_id: int) -> dict:
     """读取单条指标定义明细；不存在时给出可读的错误说明。"""

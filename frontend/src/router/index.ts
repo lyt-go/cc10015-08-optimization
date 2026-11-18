@@ -15,6 +15,7 @@ const DataExport = () => import('@/views/data_export/index.vue')
 const CohortTrack = () => import('@/views/cohort_track/index.vue')
 const ChartConfig = () => import('@/views/chart_config/index.vue')
 const InsightReport = () => import('@/views/insight_report/index.vue')
+const InsightReportDetail = () => import('@/views/insight_report/detail.vue')
 const DataFreshness = () => import('@/views/data_freshness/index.vue')
 const MetricAlias = () => import('@/views/metric_alias/index.vue')
 const ExprFactor = () => import('@/views/expr_factor/index.vue')
@@ -38,6 +39,7 @@ const router = createRouter({
     { path: '/cohort_track', name: 'cohort_track', component: CohortTrack },
     { path: '/chart_config', name: 'chart_config', component: ChartConfig },
     { path: '/insight_report', name: 'insight_report', component: InsightReport },
+    { path: '/insight_report/:id', name: 'insight_report_detail', component: InsightReportDetail },
     { path: '/data_freshness', name: 'data_freshness', component: DataFreshness },
     { path: '/metric_alias', name: 'metric_alias', component: MetricAlias },
     { path: '/expr_factor', name: 'expr_factor', component: ExprFactor },
